@@ -1,0 +1,44 @@
+
+<div class="form-group" ng-controller="ShoppingListsController">
+    <h1 class="form-control text-center ">Family List Application</h1>
+        <div class="input-group">
+            <span class="input-group-addon ">
+                <label>List:</label>
+            </span>
+            <select class="form-control" ng-model="selectedItem" ng-change="selectListChanged(selectedItem)" data-ng-options="userList as userList.UserListName for userList in userLists track by userList.UserListID"></select>
+        </div>		
+		<br/>
+		<div class="input-group ">
+            <span class="input-group-addon">
+                <label>Sort: </label>
+            </span>
+            <select class="form-control" ng-model="orderProp">
+                <option value="ListItemName">Name</option>
+                <option value="ListItemID">Order of Entry</option>
+            </select>
+
+        </div>
+	     <br/>
+        <div ng-repeat="item in currentList | filter:searchText | orderBy:orderProp">
+        <div class="input-group">
+                <span class="input-group-addon">
+                    <input type="checkbox" class="checkbox" ng-model="item.Selected"></input>
+                </span>
+                <input type="text" class="form-control" value="{{item.ListItemName}}"></input>
+                <!--<span class="input-group-addon">
+                    <image style="height:10px;" ng-src="http://www.surfnlearn.com/colorfulbuttons/r.gif">
+                </span>-->
+            </div>
+        </div>		
+        <div class="input-group">
+            <input type="text" class="form-control" placeholder="Item name...." ng-model="newItem"></input>
+            <span class="input-group-btn">
+                <button class="btn btn-default" type="submit" ng-click="addNewItemToCurrentList(newItem)">Add Item</button>
+            </span>
+        </div>
+		<br/>
+        
+    <div class="input-group pull-right ">
+        <button class="btn btn-default" type="submit" ng-click="deleteChecked()">Delete Checked</button>
+    </div>
+</div>
